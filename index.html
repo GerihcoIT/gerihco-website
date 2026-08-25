@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GERIHCO | Management Consulting</title>
+<style>
+  /* Reset: Google Sites' own theme CSS can leak margin/font defaults into
+     the iframe content, so we zero out the basics ourselves rather than
+     relying on the host page to behave. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    color: #1c1f24;
+    background: #ffffff;
+    line-height: 1.5;
+    width: 100%;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ---------- Design tokens ----------
+     Centralizing the palette here means a future rebrand or dark-mode
+     variant only requires editing this block. */
+  :root {
+    --ink: #0a0c0f;          /* near-black used for dark sections */
+    --ink-card: #16191d;     /* slightly lighter card surface on dark bg */
+    --paper: #ffffff;
+    --paper-muted: #f4f5f6;  /* light plate behind the logo on dark sections */
+    --gray-text: #5f5e5a;
+    --gray-text-dark: #9aa0a8; /* muted text on dark backgrounds */
+    --blue: #2aa7f7;         /* brand light blue, from the logo mark */
+    --blue-deep: #185fa5;    /* deeper blue for text/icons on light bg */
+    --blue-pale: #85b7eb;    /* pale blue for text/icons on dark bg */
+    --border: #e3e4e6;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Navigation ----------
+     Light plate background so the logo's black strokes stay legible,
+     independent of whatever color the section below it uses. */
+  header.nav {
+    background: var(--paper-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    color: #33363a;
+  }
+  .nav-links a:hover { color: var(--blue-deep); }
+  .nav-search { font-size: 14px; color: #33363a; }
+
+  /* ---------- Hero ----------
+     Dark, full-bleed section; headline is left-justified (Concept D)
+     rather than centered (original Concept E) per this revision. */
+  section.hero {
+    background: var(--ink);
+    color: #ffffff;
+    padding: 72px 0 64px;
+  }
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .hero p.sub {
+    font-size: 17px;
+    color: var(--gray-text-dark);
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 26px;
+    border-radius: 3px;
+  }
+  .btn-primary { background: var(--blue); color: #042c53; }
+  .btn-secondary { border: 1px solid #4a4d52; color: #ffffff; }
+  .btn-primary:hover { background: #4bb6fa; }
+  .btn-secondary:hover { background: #16191d; }
+
+  /* ---------- Who we serve ----------
+     Rounded badge cards on the dark background, carried over from
+     Concept E, using the three named target sectors. */
+  section.serve { background: var(--ink); padding: 0 0 64px; }
+  .serve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .serve-card {
+    background: var(--ink-card);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .serve-card svg { width: 28px; height: 28px; }
+  .serve-card p {
+    font-size: 14px;
+    color: #e6e8eb;
+    margin-top: 12px;
+  }
+
+  /* ---------- Statistics ----------
+     Large numerals for scannable proof points, still on the dark hero
+     field so the whole top of the page reads as one confident block. */
+  section.stats { background: var(--ink); padding: 0 0 56px; }
+  .stats-grid {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .stats-grid div { flex: 1; min-width: 140px; }
+  .stat-num { font-size: 34px; font-weight: 500; color: var(--blue-pale); }
+  .stat-label { font-size: 13px; color: var(--gray-text-dark); margin-top: 4px; }
+
+  /* ---------- Services list ----------
+     Plain, scannable list near the bottom of the page, as specified in
+     the brief. Light background provides contrast after the dark hero. */
+  section.services { padding: 64px 0; background: var(--paper); }
+  section.services h2 { font-size: 22px; font-weight: 500; margin-bottom: 24px; }
+  .service-list {
+    columns: 2;
+    column-gap: 48px;
+    list-style: none;
+    font-size: 15px;
+  }
+  .service-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    break-inside: avoid;
+  }
+
+  /* ---------- Final call to action ---------- */
+  section.final-cta {
+    background: var(--paper-muted);
+    padding: 56px 0;
+    text-align: left;
+  }
+  section.final-cta h2 {
+    font-size: 26px;
+    font-weight: 500;
+    max-width: 520px;
+    margin-bottom: 20px;
+  }
+
+  footer {
+    padding: 28px 0 48px;
+    font-size: 13px;
+    color: var(--gray-text);
+  }
+
+  /* ---------- Responsive breakpoint ----------
+     Below 720px: stack the nav links, collapse the three-column grids
+     to a single column, and drop the services list to one column so
+     nothing gets cramped on a phone-width Sites embed. */
+  @media (max-width: 720px) {
+    .nav-links { display: none; } /* replace with a menu icon in production */
+    .hero h1 { font-size: 30px; }
+    .serve-grid { grid-template-columns: 1fr; }
+    .service-list { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<!-- Load Inter: a modern, highly readable grotesque sans-serif that reads as
+     technical/sophisticated rather than corporate-default (Arial/Helvetica) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+
+<!-- ================= NAVIGATION ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <!-- Horizontal logo lockup, taken directly from gerhico_horizontal.txt -->
+    <svg viewBox="40 9 560 203" width="150" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70,120 Q140,29 210,120" stroke="#2AA7F7" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M85,120 Q140,48.5 195,120" stroke="#858585" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M100,120 Q140,68 180,120" stroke="#000000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <line x1="140" y1="120" x2="140" y2="175" stroke="#000000" stroke-width="4" stroke-linecap="round"/>
+      <path d="M140,175 Q140,192 120,192" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <text x="260" y="100" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="600" letter-spacing="3" fill="#000000">GERIHCO</text>
+      <text x="260" y="128" font-family="Inter, Arial, sans-serif" font-size="13" letter-spacing="2" fill="#858585">MANAGEMENT CONSULTING</text>
+    </svg>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#industries">Industries</a>
+                  <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-search" href="#services" aria-label="Search site">Search</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <h1>We turn institutional complexity into measurable results</h1>
+    <p class="sub">Data, technology, and strategy for the government, financial, and manufacturing institutions that cannot afford to fail.</p>
+    <div class="btn-row">
+      <a class="btn-primary" href="#contact">Start a conversation</a>
+      <a class="btn-secondary" href="#services">Our capabilities</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO WE SERVE ================= -->
+<section class="serve" id="industries">
+  <div class="wrap">
+    <div class="serve-grid">
+      <div class="serve-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#85B7EB" stroke-width="1.6"><path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg>
+        <p>Government</p>
+      </div>
+      <div class="serve-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#85B7EB" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg>
+        <p>Financial services</p>
+      </div>
+      <div class="serve-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#85B7EB" stroke-width="1.6"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg>
+        <p>Manufacturing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATISTICS ================= -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div><div class="stat-num">120+</div><div class="stat-label">Programs delivered</div></div>
+      <div><div class="stat-num">$400M</div><div class="stat-label">Cost avoidance identified</div></div>
+      <div><div class="stat-num">18 yrs</div><div class="stat-label">Working with institutional clients</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES LIST ================= -->
+<section class="services" id="services">
+  <div class="wrap">
+    <h2>What we do</h2>
+    <ul class="service-list">
+      <li>Regulatory compliance</li>
+      <li>Data analytics</li>
+      <li>AI and machine learning</li>
+      <li>Cybersecurity</li>
+      <li>Management consulting</li>
+      <li>Government contracting</li>
+      <li>Financial analysis</li>
+      <li>Risk management</li>
+
+      <li>Manufacturing optimization</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FINAL CALL TO ACTION ================= -->
+<section class="final-cta" id="contact">
+  <div class="wrap">
+    <h2>Ready to talk through a complex problem?</h2>
+    <a class="btn-primary" style="background:#042C53;color:#ffffff" href="#">Contact Gerihco</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© GERIHCO. Management consulting for institutions that cannot afford to fail.<span style="display:block;margin-top:6px;font-size:11px;">Website concept — statistics and service descriptions are placeholders.</span></div>
+</footer>
+
+</body>
+</html>
