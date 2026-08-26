@@ -14,6 +14,7 @@ Sites will not do for you automatically.
 | `services.html`    | Services     |
 | `industries.html`  | Industries   |
 | `about.html`       | About        |
+| `careers.html`     | Careers      |
 | `insights.html`    | Insights     |
 | `contact.html`     | Contact      |
 | `build_site.py`    | Generator script that produced the six files above (see "Maintaining this site" below) |
@@ -82,6 +83,7 @@ settings:
 | Services   | Services \| Gerihco Management Consulting  | An overview of Gerihco's management consulting services, including data analytics, AI and machine learning, cybersecurity, and more. |
 | Industries | Industries We Serve \| Gerihco             | Gerihco serves government, financial services, and manufacturing institutions with long-term, sustainable consulting solutions. |
 | About      | About Us \| Gerihco Management Consulting  | Gerihco is a national management consulting firm offering long-term, sustainable solutions to complex institutional problems. |
+| Careers    | Careers \| Gerihco Management Consulting   | Learn about career opportunities at Gerihco and how to submit your resume for consideration. |
 | Insights   | Insights \| Gerihco                        | Perspectives from Gerihco on the challenges facing government, financial services, and manufacturing institutions. |
 | Contact    | Contact \| Gerihco Management Consulting   | Get in touch with Gerihco to discuss a management consulting engagement for your organization. |
 
@@ -108,19 +110,37 @@ real content before launch. At a glance:
   names, titles, or bios have been invented).
 - **Insights page — entirely placeholder.** No real articles exist yet;
   three placeholder cards illustrate the intended layout.
+- **Careers page — no real job postings exist.** The "Open positions"
+  section states plainly that none are currently listed, rather than
+  inventing plausible-looking roles. One example card is included,
+  clearly labeled "Example format," purely as a reference for the
+  structure to duplicate once real postings exist — it should be removed
+  before publishing if no roles are open.
 - **Contact page — email, phone, and mailing address**, and the
   submission backend for the form (see below).
 
-## Contact form: no backend yet
+## Contact form and job application form: no backend yet
 
-The form on `contact.html` has no `action` attribute and is not connected
-to anything — submitting it currently does nothing useful. Before
+Both `contact.html` and `careers.html` contain forms with no `action`
+attribute; submitting either currently does nothing useful. The Careers
+page's resume-upload field is a real `<input type="file">`, but a static
+site — Google Sites embed or GitHub Pages alike — has no server of its
+own to receive or store an uploaded file; a browser can't send a file
+anywhere without something on the other end to accept it. Before
 publishing, either:
 
-- Point it at a form-handling service (e.g., Formspree, Basin, a Google
-  Form's endpoint), or
-- Replace that section with Google Sites' own built-in "Contact Us" page
-  element, which handles submission for you.
+- Point the form at a service built for job applications (an applicant
+  tracking system such as Greenhouse or Lever, or a form backend that
+  explicitly supports file attachments — plain form-to-email services
+  often do not), or
+- Rely on the plain-email fallback already included next to the form
+  ("Prefer email?"), which works today with no additional setup once a
+  real careers email address is filled in, or
+- Replace the section with Google Sites' own built-in "Contact Us"
+  element, if still deploying there instead of GitHub Pages.
+
+The general contact form has the same limitation and the same options —
+see the note that was already here for it.
 
 ## Photography
 

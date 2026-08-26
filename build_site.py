@@ -47,12 +47,13 @@ OUTPUT_DIR = "/mnt/user-data/outputs"
 # URL) but keeping them as clean, predictable filenames makes them easy to
 # find and replace later, and lets every file be previewed by simply
 # opening it in a browser before it is pasted into Google Sites.
-PAGE_ORDER = ["services", "industries", "about", "insights", "contact"]
+PAGE_ORDER = ["services", "industries", "about", "careers", "insights", "contact"]
 HREF = {
     "home": "index.html",
     "services": "services.html",
     "industries": "industries.html",
     "about": "about.html",
+    "careers": "careers.html",
     "insights": "insights.html",
     "contact": "contact.html",
 }
@@ -60,6 +61,7 @@ LABEL = {
     "services": "Services",
     "industries": "Industries",
     "about": "About",
+    "careers": "Careers",
     "insights": "Insights",
     "contact": "Contact",
 }
@@ -155,44 +157,70 @@ ICON_PHONE = _icon(
 ICON_PIN = _icon('<path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>')
 
 SERVICES = [
-    ("data-analytics", "Data analytics", ICON_DATA,
-     "Placeholder \u2014 a concise description of Gerihco's data analytics "
-     "offering: the kinds of problems it addresses and the outcomes it is "
-     "meant to produce for clients."),
-    ("ai-machine-learning", "AI / machine learning", ICON_AI,
-     "Placeholder \u2014 a description of Gerihco's AI and machine learning "
-     "work, including the categories of problems it is applied to."),
+    ("data-analytics", "Data Analytics", ICON_DATA,
+     "GERIHCO helps organizations transform raw data into actionable "
+     "insights that support better business decisions. We provide data "
+     "engineering, business intelligence, advanced analytics, and data "
+     "governance capabilities that help organizations build reliable data "
+     "infrastructure, understand complex information, and use data more "
+     "effectively."),
+    ("ai-machine-learning", "AI & Machine Learning", ICON_AI,
+     "GERIHCO applies artificial intelligence and machine learning to help "
+     "organizations automate complex processes, identify patterns, and "
+     "make more informed predictions. Our capabilities include predictive "
+     "modeling, natural language processing, computer vision, and the "
+     "deployment and governance of machine learning systems."),
     ("cybersecurity", "Cybersecurity", ICON_SECURITY,
-     "Placeholder \u2014 a description of Gerihco's cybersecurity practice "
-     "and the kinds of engagements it covers."),
-    ("management-consulting", "Management consulting", ICON_CONSULTING,
-     "Placeholder \u2014 a description of Gerihco's core management "
-     "consulting practice: how engagements are structured and the type of "
-     "institutional challenges it takes on."),
-    ("government-contracting", "Government contracting", ICON_GOVERNMENT,
-     "Placeholder \u2014 a description of Gerihco's government contracting "
-     "experience and the categories of agencies or programs it supports."),
-    ("financial-analysis", "Financial analysis", ICON_FINANCE,
-     "Placeholder \u2014 a description of Gerihco's financial analysis "
-     "offering and the kinds of institutions it is provided to."),
-    ("manufacturing-optimization", "Manufacturing optimization", ICON_MANUFACTURING,
-     "Placeholder \u2014 a description of Gerihco's manufacturing "
-     "optimization work and the kinds of operational problems it addresses."),
+     "GERIHCO helps organizations protect digital systems, networks, cloud "
+     "environments, and sensitive information from evolving cyber threats. "
+     "Our cybersecurity capabilities include endpoint protection, identity "
+     "and access management, managed detection and response, and "
+     "vulnerability assessment."),
+    ("management-consulting", "Management Consulting", ICON_CONSULTING,
+     "GERIHCO helps leaders address complex operational challenges, "
+     "improve organizational performance, and develop strategies for "
+     "long-term growth. Our consulting capabilities span corporate "
+     "strategy, operations improvement, organizational change, and "
+     "technology transformation."),
+    ("government-contracting", "Government Contracting", ICON_GOVERNMENT,
+     "GERIHCO provides support for organizations pursuing and managing "
+     "public-sector opportunities. Our capabilities include bid and "
+     "proposal development, regulatory compliance, contract "
+     "administration, and support navigating government procurement "
+     "requirements."),
+    ("financial-analysis", "Financial Analysis", ICON_FINANCE,
+     "GERIHCO helps organizations evaluate financial performance, assess "
+     "opportunities, and manage economic and financial risk. Our "
+     "capabilities include financial planning and analysis, corporate "
+     "valuation, investment appraisal, and risk management."),
+    ("manufacturing-optimization", "Manufacturing Optimization", ICON_MANUFACTURING,
+     "GERIHCO helps manufacturers improve operational efficiency through "
+     "data analytics, artificial intelligence, automation, and advanced "
+     "management strategies. Our capabilities include predictive "
+     "maintenance, process automation, quality and defect tracking, and "
+     "supply chain optimization."),
+]
+
+TECH_CATEGORIES = [
+    ("Cloud & Data", "Amazon Web Services \u00b7 Microsoft Azure \u00b7 Google Cloud"),
+    ("Business Intelligence", "Tableau \u00b7 Microsoft Power BI"),
+    ("Cybersecurity", "CrowdStrike \u00b7 Palo Alto Networks \u00b7 Microsoft Security"),
+    ("Standards & Frameworks", "ISO \u00b7 CMMI \u00b7 cGMP \u00b7 Federal Acquisition Regulation"),
 ]
 
 INDUSTRIES = [
     ("government", "Government", ICON_GOVERNMENT,
-     "Placeholder \u2014 a description of the government agencies and "
-     "program types Gerihco supports, and the categories of challenges "
-     "typically addressed."),
-    ("financial-services", "Financial services", ICON_FINANCE,
-     "Placeholder \u2014 a description of the financial services "
-     "institutions Gerihco works with and the categories of challenges "
-     "typically addressed."),
+     "GERIHCO helps public-sector organizations address complex "
+     "operational, technological, and procurement challenges through "
+     "data, technology, and management expertise."),
+    ("financial-services", "Financial Services", ICON_FINANCE,
+     "GERIHCO helps financial organizations use data, technology, and "
+     "analytical methods to improve decision-making, manage risk, and "
+     "evaluate business opportunities."),
     ("manufacturing", "Manufacturing", ICON_MANUFACTURING,
-     "Placeholder \u2014 a description of the manufacturing organizations "
-     "Gerihco works with and the categories of challenges typically "
-     "addressed."),
+     "GERIHCO helps manufacturers improve operational performance through "
+     "analytics, artificial intelligence, automation, and process "
+     "optimization."),
 ]
 
 AUDIENCE = [
@@ -470,6 +498,45 @@ SHARED_STYLE = """
   .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   .service-card p { font-size: 14px; }
 
+  /* ---------- Technology section (bottom of services.html) ---------- */
+  section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
+  section.technology h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+  section.technology > .wrap > p { color: var(--gray-text); max-width: 620px; margin-bottom: 24px; }
+  .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .tech-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .tech-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
+  .tech-card p { font-size: 14px; color: var(--gray-text); }
+
+  /* ---------- Careers page ---------- */
+  section.careers-openings { padding: 64px 0 40px; }
+  section.careers-openings h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  section.careers-apply { padding: 0 0 64px; }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--paper-muted);
+    color: var(--gray-text);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+  .job-card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 16px; }
+  .job-card h3 { font-size: 16px; font-weight: 600; margin: 4px 0 6px; }
+  .job-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .job-tag {
+    font-size: 12px;
+    color: var(--gray-text);
+    background: var(--paper-muted);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .job-card .apply-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
+  .contact-form input[type="file"] { border: 1px dashed var(--border); background: var(--paper-muted); padding: 10px 12px; }
+
   /* ---------- Industry rows (industries.html) ---------- */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
@@ -570,6 +637,7 @@ SHARED_STYLE = """
     .serve-grid { grid-template-columns: 1fr; }
     .service-list { columns: 1; }
     .service-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .insights-grid { grid-template-columns: 1fr; }
     .industry-row { grid-template-columns: 1fr; }
@@ -635,6 +703,7 @@ FOOTER = (
     '      <a href="{services}" target="_top">Services</a>\n'
     '      <a href="{industries}" target="_top">Industries</a>\n'
     '      <a href="{about}" target="_top">About</a>\n'
+    '      <a href="{careers}" target="_top">Careers</a>\n'
     '      <a href="{insights}" target="_top">Insights</a>\n'
     '      <a href="{contact}" target="_top">Contact</a>\n'
     "    </nav>\n"
@@ -788,23 +857,44 @@ def services_content():
         '<article class="service-card" id="{anchor}">\n'
         "        {icon}\n"
         "        <h2>{label}</h2>\n"
-        '        <p class="placeholder">[{desc}]</p>\n'
+        "        <p>{desc}</p>\n"
         "      </article>".format(anchor=anchor, icon=icon, label=label, desc=desc)
         for anchor, label, icon, desc in SERVICES
+    )
+    tech_cards = "\n      ".join(
+        '<div class="tech-card">\n'
+        "        <h3>{title}</h3>\n"
+        "        <p>{items}</p>\n"
+        "      </div>".format(title=title, items=items)
+        for title, items in TECH_CATEGORIES
     )
     return (
         '<main id="main">\n'
         '<section class="page-header">\n'
         '  <div class="wrap">\n'
         "    <h1>Services</h1>\n"
-        "    <p>Gerihco offers long-term, sustainable solutions across the "
-        "following service lines.</p>\n"
+        "    <p>GERIHCO helps organizations solve complex challenges "
+        "through data, technology, strategy, and operational expertise. "
+        "Our services combine technical capabilities with practical "
+        "business and organizational insight to help clients make better "
+        "decisions, manage risk, and improve performance.</p>\n"
         "  </div>\n"
         "</section>\n"
         '<section class="service-detail">\n'
         '  <div class="wrap">\n'
         '    <div class="service-grid">\n'
         "      {cards}\n"
+        "    </div>\n"
+        "  </div>\n"
+        "</section>\n"
+        '<section class="technology" id="technology">\n'
+        '  <div class="wrap">\n'
+        "    <h2>Technology</h2>\n"
+        "    <p>GERIHCO works across modern technology platforms and tools "
+        "to develop solutions that align with each organization's existing "
+        "environment and requirements.</p>\n"
+        '    <div class="tech-grid">\n'
+        "      {tech_cards}\n"
         "    </div>\n"
         "  </div>\n"
         "</section>\n"
@@ -816,7 +906,7 @@ def services_content():
         "  </div>\n"
         "</section>\n"
         "</main>"
-    ).format(cards=cards, contact=HREF["contact"])
+    ).format(cards=cards, tech_cards=tech_cards, contact=HREF["contact"])
 
 
 def industries_content():
@@ -825,7 +915,7 @@ def industries_content():
         '        <div class="industry-icon">{icon}</div>\n'
         "        <div>\n"
         "          <h2>{label}</h2>\n"
-        '          <p class="placeholder">[{desc}]</p>\n'
+        "          <p>{desc}</p>\n"
         "        </div>\n"
         "      </div>".format(anchor=anchor, icon=icon, label=label, desc=desc)
         for anchor, label, icon, desc in INDUSTRIES
@@ -836,7 +926,9 @@ def industries_content():
         '<section class="page-header">\n'
         '  <div class="wrap">\n'
         "    <h1>Industries</h1>\n"
-        "    <p>Gerihco works with institutions in the following sectors.</p>\n"
+        "    <p>GERIHCO works with organizations facing complex technical, "
+        "operational, and strategic challenges across highly regulated and "
+        "data-intensive industries.</p>\n"
         "  </div>\n"
         "</section>\n"
         '<section class="industry-detail">\n'
@@ -992,6 +1084,103 @@ def contact_content():
     ).format(icon_email=ICON_EMAIL, icon_phone=ICON_PHONE, icon_pin=ICON_PIN)
 
 
+def careers_content():
+    """Careers page.
+
+    Two deliberate content decisions here, both worth flagging to
+    whoever reviews this before publishing:
+
+    1. No fabricated job listings. Since no real openings were supplied,
+       the "Open positions" section states plainly that none are
+       currently listed, rather than inventing plausible-looking roles --
+       a fake job posting is a materially worse placeholder than most,
+       since a real applicant could act on it. A single clearly-labeled
+       example card is included underneath purely as a formatting
+       reference for whoever adds the first real posting.
+    2. The resume upload field is a genuine <input type="file">, but a
+       static site (Google Sites embed or GitHub Pages alike) has no
+       server to receive that file. This mirrors the contact form's
+       "no backend yet" situation, and is called out the same way, with
+       an additional plain-email fallback that works today without any
+       extra infrastructure.
+    """
+    return (
+        '<main id="main">\n'
+        '<section class="page-header">\n'
+        '  <div class="wrap">\n'
+        "    <h1>Careers</h1>\n"
+        '    <p class="placeholder">[Placeholder \u2014 a short introduction '
+        "to why to join Gerihco: culture, growth opportunities, or mission "
+        "framing to be supplied by the client.]</p>\n"
+        "  </div>\n"
+        "</section>\n"
+        '<section class="careers-openings">\n'
+        '  <div class="wrap">\n'
+        "    <h2>Open positions</h2>\n"
+        "    <p>There are no open positions listed at this time. Check "
+        "back soon, or submit your resume below for future consideration."
+        "</p>\n"
+        "    <!-- Example only: remove this card once real postings exist, "
+        "or duplicate its structure per real opening. -->\n"
+        '    <div class="job-card">\n'
+        '      <span class="badge">Example format</span>\n'
+        "      <h3>[Placeholder job title]</h3>\n"
+        '      <div class="job-tags">\n'
+        '        <span class="job-tag">[Placeholder location]</span>\n'
+        '        <span class="job-tag">[Placeholder employment type]</span>\n'
+        "      </div>\n"
+        '      <p class="placeholder">[Placeholder \u2014 one or two '
+        "sentence job summary.]</p>\n"
+        '      <a class="apply-link" href="#apply">Apply for this position \u2192</a>\n'
+        "    </div>\n"
+        "  </div>\n"
+        "</section>\n"
+        '<section class="careers-apply" id="apply">\n'
+        '  <div class="wrap contact-layout">\n'
+        '    <form class="contact-form" aria-label="Job application form">\n'
+        '      <div class="field">\n'
+        '        <label for="applicant-name">Name</label>\n'
+        '        <input type="text" id="applicant-name" name="name" autocomplete="name" required>\n'
+        "      </div>\n"
+        '      <div class="field">\n'
+        '        <label for="applicant-email">Email</label>\n'
+        '        <input type="email" id="applicant-email" name="email" autocomplete="email" required>\n'
+        "      </div>\n"
+        '      <div class="field">\n'
+        '        <label for="applicant-position">Position of interest</label>\n'
+        '        <input type="text" id="applicant-position" name="position">\n'
+        "      </div>\n"
+        '      <div class="field">\n'
+        '        <label for="applicant-resume">Resume (PDF or Word document)</label>\n'
+        '        <input type="file" id="applicant-resume" name="resume" '
+        'accept=".pdf,.doc,.docx">\n'
+        "      </div>\n"
+        '      <div class="field">\n'
+        '        <label for="applicant-message">Message (optional)</label>\n'
+        '        <textarea id="applicant-message" name="message"></textarea>\n'
+        "      </div>\n"
+        '      <p class="placeholder-box" style="margin-bottom:18px;">[Placeholder '
+        "\u2014 this form, including the resume upload field, is not yet "
+        "connected to a submission backend. A static site cannot receive "
+        "or store an uploaded file on its own; connect this to a service "
+        "built for job applications (an applicant tracking system, or a "
+        "form backend that explicitly supports file attachments) before "
+        "publishing.]</p>\n"
+        '      <button type="submit" class="btn-primary" '
+        'style="background:#042C53;color:#ffffff">Submit application</button>\n'
+        "    </form>\n"
+        '    <aside class="contact-info">\n'
+        "      <h2>Prefer email?</h2>\n"
+        '      <div class="contact-line">{icon_email}<span class="placeholder">'
+        "[Placeholder \u2014 careers email address] \u2014 attach your resume "
+        "directly.</span></div>\n"
+        "    </aside>\n"
+        "  </div>\n"
+        "</section>\n"
+        "</main>"
+    ).format(icon_email=ICON_EMAIL)
+
+
 # ---------------------------------------------------------------------------
 # Page registry: (key, <title>, meta description, content function)
 # Titles and descriptions are grounded in the provided Company Identity,
@@ -1017,6 +1206,10 @@ PAGES = [
      "Gerihco is a national management consulting firm offering long-term, "
      "sustainable solutions to complex institutional problems.",
      about_content),
+    ("careers", "Careers | Gerihco Management Consulting",
+     "Learn about career opportunities at Gerihco and how to submit your "
+     "resume for consideration.",
+     careers_content),
     ("insights", "Insights | Gerihco",
      "Perspectives from Gerihco on the challenges facing government, "
      "financial services, and manufacturing institutions.",
