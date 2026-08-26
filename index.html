@@ -281,6 +281,15 @@
   .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   .service-card p { font-size: 14px; }
 
+  /* ---------- Technology section (bottom of services.html) ---------- */
+  section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
+  section.technology h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+  section.technology > .wrap > p { color: var(--gray-text); max-width: 620px; margin-bottom: 24px; }
+  .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .tech-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .tech-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
+  .tech-card p { font-size: 14px; color: var(--gray-text); }
+
   /* ---------- Industry rows (industries.html) ---------- */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
@@ -381,6 +390,7 @@
     .serve-grid { grid-template-columns: 1fr; }
     .service-list { columns: 1; }
     .service-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .insights-grid { grid-template-columns: 1fr; }
     .industry-row { grid-template-columns: 1fr; }
@@ -425,7 +435,7 @@
       </a>
       <a class="serve-card" href="industries.html#financial-services" target="_top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg>
-        <p>Financial services</p>
+        <p>Financial Services</p>
       </a>
       <a class="serve-card" href="industries.html#manufacturing" target="_top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg>
@@ -448,13 +458,13 @@
     <h2>What we do</h2>
     <p>An overview of Gerihco's service lines; see the <a href="services.html" target="_top">Services</a> page for more on each.</p>
     <ul class="service-list">
-      <li><a href="services.html#data-analytics" target="_top">Data analytics</a></li>
-      <li><a href="services.html#ai-machine-learning" target="_top">AI / machine learning</a></li>
+      <li><a href="services.html#data-analytics" target="_top">Data Analytics</a></li>
+      <li><a href="services.html#ai-machine-learning" target="_top">AI & Machine Learning</a></li>
       <li><a href="services.html#cybersecurity" target="_top">Cybersecurity</a></li>
-      <li><a href="services.html#management-consulting" target="_top">Management consulting</a></li>
-      <li><a href="services.html#government-contracting" target="_top">Government contracting</a></li>
-      <li><a href="services.html#financial-analysis" target="_top">Financial analysis</a></li>
-      <li><a href="services.html#manufacturing-optimization" target="_top">Manufacturing optimization</a></li>
+      <li><a href="services.html#management-consulting" target="_top">Management Consulting</a></li>
+      <li><a href="services.html#government-contracting" target="_top">Government Contracting</a></li>
+      <li><a href="services.html#financial-analysis" target="_top">Financial Analysis</a></li>
+      <li><a href="services.html#manufacturing-optimization" target="_top">Manufacturing Optimization</a></li>
     </ul>
     <a class="view-all" href="services.html" target="_top">View all capabilities →</a>
   </div>

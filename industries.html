@@ -281,6 +281,15 @@
   .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   .service-card p { font-size: 14px; }
 
+  /* ---------- Technology section (bottom of services.html) ---------- */
+  section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
+  section.technology h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+  section.technology > .wrap > p { color: var(--gray-text); max-width: 620px; margin-bottom: 24px; }
+  .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .tech-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .tech-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
+  .tech-card p { font-size: 14px; color: var(--gray-text); }
+
   /* ---------- Industry rows (industries.html) ---------- */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
@@ -381,6 +390,7 @@
     .serve-grid { grid-template-columns: 1fr; }
     .service-list { columns: 1; }
     .service-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .insights-grid { grid-template-columns: 1fr; }
     .industry-row { grid-template-columns: 1fr; }
@@ -409,7 +419,7 @@
 <section class="page-header">
   <div class="wrap">
     <h1>Industries</h1>
-    <p>Gerihco works with institutions in the following sectors.</p>
+    <p>GERIHCO works with organizations facing complex technical, operational, and strategic challenges across highly regulated and data-intensive industries.</p>
   </div>
 </section>
 <section class="industry-detail">
@@ -418,21 +428,21 @@
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg></div>
         <div>
           <h2>Government</h2>
-          <p class="placeholder">[Placeholder — a description of the government agencies and program types Gerihco supports, and the categories of challenges typically addressed.]</p>
+          <p>GERIHCO helps public-sector organizations address complex operational, technological, and procurement challenges through data, technology, and management expertise.</p>
         </div>
       </div>
       <div class="industry-row" id="financial-services">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg></div>
         <div>
-          <h2>Financial services</h2>
-          <p class="placeholder">[Placeholder — a description of the financial services institutions Gerihco works with and the categories of challenges typically addressed.]</p>
+          <h2>Financial Services</h2>
+          <p>GERIHCO helps financial organizations use data, technology, and analytical methods to improve decision-making, manage risk, and evaluate business opportunities.</p>
         </div>
       </div>
       <div class="industry-row" id="manufacturing">
         <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg></div>
         <div>
           <h2>Manufacturing</h2>
-          <p class="placeholder">[Placeholder — a description of the manufacturing organizations Gerihco works with and the categories of challenges typically addressed.]</p>
+          <p>GERIHCO helps manufacturers improve operational performance through analytics, artificial intelligence, automation, and process optimization.</p>
         </div>
       </div>
   </div>

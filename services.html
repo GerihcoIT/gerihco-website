@@ -281,6 +281,15 @@
   .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   .service-card p { font-size: 14px; }
 
+  /* ---------- Technology section (bottom of services.html) ---------- */
+  section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
+  section.technology h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+  section.technology > .wrap > p { color: var(--gray-text); max-width: 620px; margin-bottom: 24px; }
+  .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .tech-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .tech-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
+  .tech-card p { font-size: 14px; color: var(--gray-text); }
+
   /* ---------- Industry rows (industries.html) ---------- */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
@@ -381,6 +390,7 @@
     .serve-grid { grid-template-columns: 1fr; }
     .service-list { columns: 1; }
     .service-grid { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
     .values-grid { grid-template-columns: 1fr; }
     .insights-grid { grid-template-columns: 1fr; }
     .industry-row { grid-template-columns: 1fr; }
@@ -409,7 +419,7 @@
 <section class="page-header">
   <div class="wrap">
     <h1>Services</h1>
-    <p>Gerihco offers long-term, sustainable solutions across the following service lines.</p>
+    <p>GERIHCO helps organizations solve complex challenges through data, technology, strategy, and operational expertise. Our services combine technical capabilities with practical business and organizational insight to help clients make better decisions, manage risk, and improve performance.</p>
   </div>
 </section>
 <section class="service-detail">
@@ -417,39 +427,63 @@
     <div class="service-grid">
       <article class="service-card" id="data-analytics">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-7"/></svg>
-        <h2>Data analytics</h2>
-        <p class="placeholder">[Placeholder — a concise description of Gerihco's data analytics offering: the kinds of problems it addresses and the outcomes it is meant to produce for clients.]</p>
+        <h2>Data Analytics</h2>
+        <p>GERIHCO helps organizations transform raw data into actionable insights that support better business decisions. We provide data engineering, business intelligence, advanced analytics, and data governance capabilities that help organizations build reliable data infrastructure, understand complex information, and use data more effectively.</p>
       </article>
       <article class="service-card" id="ai-machine-learning">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7.6 8.4l3.4 8M16.4 8.4l-3.4 8M8 7h8"/></svg>
-        <h2>AI / machine learning</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's AI and machine learning work, including the categories of problems it is applied to.]</p>
+        <h2>AI & Machine Learning</h2>
+        <p>GERIHCO applies artificial intelligence and machine learning to help organizations automate complex processes, identify patterns, and make more informed predictions. Our capabilities include predictive modeling, natural language processing, computer vision, and the deployment and governance of machine learning systems.</p>
       </article>
       <article class="service-card" id="cybersecurity">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/></svg>
         <h2>Cybersecurity</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's cybersecurity practice and the kinds of engagements it covers.]</p>
+        <p>GERIHCO helps organizations protect digital systems, networks, cloud environments, and sensitive information from evolving cyber threats. Our cybersecurity capabilities include endpoint protection, identity and access management, managed detection and response, and vulnerability assessment.</p>
       </article>
       <article class="service-card" id="management-consulting">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 15c2-6 6-9 8-9s6 3 8 9"/><path d="M7 15c1.5-4 4-6 5-6s3.5 2 5 6"/></svg>
-        <h2>Management consulting</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's core management consulting practice: how engagements are structured and the type of institutional challenges it takes on.]</p>
+        <h2>Management Consulting</h2>
+        <p>GERIHCO helps leaders address complex operational challenges, improve organizational performance, and develop strategies for long-term growth. Our consulting capabilities span corporate strategy, operations improvement, organizational change, and technology transformation.</p>
       </article>
       <article class="service-card" id="government-contracting">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg>
-        <h2>Government contracting</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's government contracting experience and the categories of agencies or programs it supports.]</p>
+        <h2>Government Contracting</h2>
+        <p>GERIHCO provides support for organizations pursuing and managing public-sector opportunities. Our capabilities include bid and proposal development, regulatory compliance, contract administration, and support navigating government procurement requirements.</p>
       </article>
       <article class="service-card" id="financial-analysis">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg>
-        <h2>Financial analysis</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's financial analysis offering and the kinds of institutions it is provided to.]</p>
+        <h2>Financial Analysis</h2>
+        <p>GERIHCO helps organizations evaluate financial performance, assess opportunities, and manage economic and financial risk. Our capabilities include financial planning and analysis, corporate valuation, investment appraisal, and risk management.</p>
       </article>
       <article class="service-card" id="manufacturing-optimization">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg>
-        <h2>Manufacturing optimization</h2>
-        <p class="placeholder">[Placeholder — a description of Gerihco's manufacturing optimization work and the kinds of operational problems it addresses.]</p>
+        <h2>Manufacturing Optimization</h2>
+        <p>GERIHCO helps manufacturers improve operational efficiency through data analytics, artificial intelligence, automation, and advanced management strategies. Our capabilities include predictive maintenance, process automation, quality and defect tracking, and supply chain optimization.</p>
       </article>
+    </div>
+  </div>
+</section>
+<section class="technology" id="technology">
+  <div class="wrap">
+    <h2>Technology</h2>
+    <p>GERIHCO works across modern technology platforms and tools to develop solutions that align with each organization's existing environment and requirements.</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h3>Cloud & Data</h3>
+        <p>Amazon Web Services · Microsoft Azure · Google Cloud</p>
+      </div>
+      <div class="tech-card">
+        <h3>Business Intelligence</h3>
+        <p>Tableau · Microsoft Power BI</p>
+      </div>
+      <div class="tech-card">
+        <h3>Cybersecurity</h3>
+        <p>CrowdStrike · Palo Alto Networks · Microsoft Security</p>
+      </div>
+      <div class="tech-card">
+        <h3>Standards & Frameworks</h3>
+        <p>ISO · CMMI · cGMP · Federal Acquisition Regulation</p>
+      </div>
     </div>
   </div>
 </section>
