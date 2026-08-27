@@ -162,9 +162,21 @@
   }
 
   /* ---------- Hero (home page only) ----------
-     Dark, full-bleed section; headline is left-justified. */
+     Dark, full-bleed section; headline is left-justified. The photo is
+     layered under a dark gradient (matching --ink) so the white headline
+     stays legible regardless of the image's own tonal range; --ink alone
+     remains the background-color fallback if the image fails to load.
+     Purely decorative/atmospheric, so it is a CSS background-image rather
+     than an <img> -- it carries no information the text doesn't already
+     provide, so no alt text is needed or appropriate here. */
   section.hero {
-    background: var(--ink);
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(180deg, rgba(10,12,15,0.45) 0%, rgba(10,12,15,0.92) 100%),
+      url('images/hero-01-alt.jpg');
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
     color: #ffffff;
     padding: 72px 0 64px;
   }
@@ -320,19 +332,49 @@
   .job-card .apply-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
   .contact-form input[type="file"] { border: 1px dashed var(--border); background: var(--paper-muted); padding: 10px 12px; }
 
-  /* ---------- Industry rows (industries.html) ---------- */
+  /* ---------- Industry rows (industries.html) ----------
+     Each row leads with a media slot: a real photo where one has been
+     supplied and passed the brand-safety check, or a placeholder box of
+     the same footprint where none exists yet, so the page reads as one
+     consistent grid rather than looking unfinished in just one spot. */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
     display: grid;
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 220px 1fr;
     gap: 24px;
     padding: 32px 0;
     border-bottom: 1px solid var(--border);
+    align-items: start;
   }
   .industry-row:last-of-type { border-bottom: none; }
-  .industry-row .industry-icon { color: var(--blue-deep); }
-  .industry-row .industry-icon svg { width: 32px; height: 32px; }
-  .industry-row h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .industry-media {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper-muted);
+  }
+  .industry-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .industry-media.placeholder-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+  }
+  .industry-row h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .industry-row .industry-icon { color: var(--blue-deep); display: inline-flex; }
+  .industry-row .industry-icon svg { width: 22px; height: 22px; }
   .industry-row p { font-size: 15px; }
 
   section.audience { padding: 0 0 64px; background: var(--paper); }
@@ -456,23 +498,23 @@
 <section class="industry-detail">
   <div class="wrap">
       <div class="industry-row" id="government">
-        <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg></div>
+        <div class="industry-media"><img src="images/government-01.jpg" alt="The dome of the U.S. Capitol building in monochrome, with the American flag flying in front of it" loading="lazy"></div>
         <div>
-          <h2>Government</h2>
+          <h2><span class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/></svg></span>Government</h2>
           <p>GERIHCO helps public-sector organizations address complex operational, technological, and procurement challenges through data, technology, and management expertise.</p>
         </div>
       </div>
       <div class="industry-row" id="financial-services">
-        <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg></div>
+        <div class="industry-media placeholder-box">[Placeholder — Financial Services sector photograph pending; see manifest.csv for licensed candidates.]</div>
         <div>
-          <h2>Financial Services</h2>
+          <h2><span class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/></svg></span>Financial Services</h2>
           <p>GERIHCO helps financial organizations use data, technology, and analytical methods to improve decision-making, manage risk, and evaluate business opportunities.</p>
         </div>
       </div>
       <div class="industry-row" id="manufacturing">
-        <div class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg></div>
+        <div class="industry-media placeholder-box">[Placeholder — Manufacturing sector photograph pending; see manifest.csv for licensed candidates.]</div>
         <div>
-          <h2>Manufacturing</h2>
+          <h2><span class="industry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/></svg></span>Manufacturing</h2>
           <p>GERIHCO helps manufacturers improve operational performance through analytics, artificial intelligence, automation, and process optimization.</p>
         </div>
       </div>

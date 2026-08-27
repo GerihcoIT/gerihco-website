@@ -17,6 +17,7 @@ Sites will not do for you automatically.
 | `careers.html`     | Careers      |
 | `insights.html`    | Insights     |
 | `contact.html`     | Contact      |
+| `images/`          | Photography used by the pages above |
 | `build_site.py`    | Generator script that produced the six files above (see "Maintaining this site" below) |
 
 Each `.html` file is a complete, self-contained document (fonts, CSS, and
@@ -144,15 +145,62 @@ see the note that was already here for it.
 
 ## Photography
 
-No photographs are used anywhere in this build; sourcing was listed as
-still pending. Rather than linking to placeholder image files (which
-would render as broken-image icons), sections that will eventually carry
-photography are simply not present yet. When photography is ready, the
-convention to follow for alt text is: describe what is *in* the image and
-relevant to the surrounding content, not that it's a photo — e.g.
-`alt="Analysts reviewing data in a conference room"`, not
-`alt="Photo of employees"` or `alt=""` for a meaningful (non-decorative)
-image.
+Two of the ten candidates listed in `manifest.csv` were actually supplied
+as image files (`hero01alt.jpg`, `government01.jpg`); the other eight
+manifest rows are licensed candidates that were researched and vetted but
+never uploaded, so they aren't on the site.
+
+**Brand-safety check.** Both supplied images were inspected for visible
+company logos, signage, or other brand marks before use — the same
+"unbranded subjects" criterion the shortlist reasoning document applied
+when it excluded an Apple Store photo earlier in this project.
+
+- `images/hero-01-alt.jpg` (Alex Lvrs, via Unsplash) — an architectural
+  detail shot of pipes and glazing. No text, signage, or logo of any kind
+  is visible. **Passed.**
+- `images/government-01.jpg` (Sebastian Schuster, via Unsplash) — the
+  U.S. Capitol dome. No company branding is present (it depicts a
+  government building, not a private company, so this check doesn't
+  really apply to it the way it would to a corporate subject).
+  **Passed.**
+
+Both are in use: the hero alt photo as the home page's hero background
+(behind a dark gradient for text contrast), and the government photo in
+the Industries page's Government row.
+
+**Two caveats worth flagging, distinct from the logo check:**
+
+1. **Resolution.** The shortlist reasoning document set a 1920px-long-edge
+   floor for any image used as a large, full-bleed element. Both supplied
+   files fall short of that (`hero-01-alt.jpg` is 896×1344; `government-01.jpg`
+   is 952×1288) — dimensions apparently weren't preserved on upload. They
+   are usable as included, but will look softer than ideal on a large
+   desktop hero on a high-resolution display. Re-supplying at full
+   resolution before launch would be worth doing.
+2. **Color grading.** The manifest's note on the hero alt image flagged a
+   green/purple color cast that needed correcting before use against the
+   site's dark theme. A moderate desaturation (via Pillow, `Color`
+   enhance factor 0.72) was applied as a first pass when the file was
+   copied into `images/`. This is a reasonable approximation, not a
+   substitute for an actual edit in a photo tool if a more precise match
+   is wanted.
+
+**No image failed the brand-safety check this round** — there was
+nothing to hold back or replace with a placeholder. The Financial
+Services and Manufacturing rows on the Industries page show a styled
+placeholder instead, but that's because no file exists for those sectors
+yet, not because anything was rejected. If you supply
+`financial-01.jpg` / `manufacturing-01.jpg` (or any other row from
+`manifest.csv`) as actual files later, I can run the same check on them,
+place them at `images/<proposed_filename>` to match the manifest's own
+naming, and wire them into the corresponding row.
+
+One structural note: this `images/` folder approach depends on GitHub
+Pages serving the HTML and image files together as a normal file tree.
+It will not work if this ever goes back to a Google Sites "Embed code"
+box, since that method only accepts a text blob with no place to attach
+accompanying files — photos would need to be re-inlined as data URIs or
+hosted externally in that scenario.
 
 ## Design decisions and changes from the original file
 

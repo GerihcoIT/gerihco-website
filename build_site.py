@@ -212,15 +212,20 @@ INDUSTRIES = [
     ("government", "Government", ICON_GOVERNMENT,
      "GERIHCO helps public-sector organizations address complex "
      "operational, technological, and procurement challenges through "
-     "data, technology, and management expertise."),
+     "data, technology, and management expertise.",
+     ("images/government-01.jpg",
+      "The dome of the U.S. Capitol building in monochrome, with the "
+      "American flag flying in front of it")),
     ("financial-services", "Financial Services", ICON_FINANCE,
      "GERIHCO helps financial organizations use data, technology, and "
      "analytical methods to improve decision-making, manage risk, and "
-     "evaluate business opportunities."),
+     "evaluate business opportunities.",
+     None),
     ("manufacturing", "Manufacturing", ICON_MANUFACTURING,
      "GERIHCO helps manufacturers improve operational performance through "
      "analytics, artificial intelligence, automation, and process "
-     "optimization."),
+     "optimization.",
+     None),
 ]
 
 AUDIENCE = [
@@ -379,9 +384,21 @@ SHARED_STYLE = """
   }
 
   /* ---------- Hero (home page only) ----------
-     Dark, full-bleed section; headline is left-justified. */
+     Dark, full-bleed section; headline is left-justified. The photo is
+     layered under a dark gradient (matching --ink) so the white headline
+     stays legible regardless of the image's own tonal range; --ink alone
+     remains the background-color fallback if the image fails to load.
+     Purely decorative/atmospheric, so it is a CSS background-image rather
+     than an <img> -- it carries no information the text doesn't already
+     provide, so no alt text is needed or appropriate here. */
   section.hero {
-    background: var(--ink);
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(180deg, rgba(10,12,15,0.45) 0%, rgba(10,12,15,0.92) 100%),
+      url('images/hero-01-alt.jpg');
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
     color: #ffffff;
     padding: 72px 0 64px;
   }
@@ -537,19 +554,49 @@ SHARED_STYLE = """
   .job-card .apply-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
   .contact-form input[type="file"] { border: 1px dashed var(--border); background: var(--paper-muted); padding: 10px 12px; }
 
-  /* ---------- Industry rows (industries.html) ---------- */
+  /* ---------- Industry rows (industries.html) ----------
+     Each row leads with a media slot: a real photo where one has been
+     supplied and passed the brand-safety check, or a placeholder box of
+     the same footprint where none exists yet, so the page reads as one
+     consistent grid rather than looking unfinished in just one spot. */
   section.industry-detail { padding: 64px 0; }
   .industry-row {
     display: grid;
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 220px 1fr;
     gap: 24px;
     padding: 32px 0;
     border-bottom: 1px solid var(--border);
+    align-items: start;
   }
   .industry-row:last-of-type { border-bottom: none; }
-  .industry-row .industry-icon { color: var(--blue-deep); }
-  .industry-row .industry-icon svg { width: 32px; height: 32px; }
-  .industry-row h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .industry-media {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper-muted);
+  }
+  .industry-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .industry-media.placeholder-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+  }
+  .industry-row h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .industry-row .industry-icon { color: var(--blue-deep); display: inline-flex; }
+  .industry-row .industry-icon svg { width: 22px; height: 22px; }
   .industry-row p { font-size: 15px; }
 
   section.audience { padding: 0 0 64px; background: var(--paper); }
@@ -800,7 +847,7 @@ def home_content():
         "        {icon}\n"
         "        <p>{label}</p>\n"
         "      </a>".format(industries=HREF["industries"], anchor=anchor, icon=icon, label=label)
-        for anchor, label, icon, _desc in INDUSTRIES
+        for anchor, label, icon, _desc, _image in INDUSTRIES
     )
 
     return (
@@ -910,15 +957,29 @@ def services_content():
 
 
 def industries_content():
+    def _media(anchor, label, image):
+        if image is not None:
+            src, alt = image
+            return '<div class="industry-media"><img src="{src}" alt="{alt}" loading="lazy"></div>'.format(
+                src=src, alt=alt
+            )
+        return (
+            '<div class="industry-media placeholder-box">[Placeholder \u2014 '
+            "{label} sector photograph pending; see manifest.csv for "
+            "licensed candidates.]</div>"
+        ).format(label=label)
+
     rows = "\n      ".join(
         '<div class="industry-row" id="{anchor}">\n'
-        '        <div class="industry-icon">{icon}</div>\n'
+        "        {media}\n"
         "        <div>\n"
-        "          <h2>{label}</h2>\n"
+        '          <h2><span class="industry-icon">{icon}</span>{label}</h2>\n'
         "          <p>{desc}</p>\n"
         "        </div>\n"
-        "      </div>".format(anchor=anchor, icon=icon, label=label, desc=desc)
-        for anchor, label, icon, desc in INDUSTRIES
+        "      </div>".format(
+            anchor=anchor, media=_media(anchor, label, image), icon=icon, label=label, desc=desc
+        )
+        for anchor, label, icon, desc, image in INDUSTRIES
     )
     audience_items = "\n      ".join("<li>{0}</li>".format(a) for a in AUDIENCE)
     return (
