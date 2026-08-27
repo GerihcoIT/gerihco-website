@@ -34,6 +34,7 @@ insights.html, and contact.html into OUTPUT_DIR.
 """
 
 import os
+from datetime import date
 from urllib.parse import quote
 
 # ---------------------------------------------------------------------------
@@ -41,6 +42,11 @@ from urllib.parse import quote
 # ---------------------------------------------------------------------------
 
 OUTPUT_DIR = "/mnt/user-data/outputs"
+
+# The site's live, canonical base URL. Used to build the <link rel="canonical">
+# and og:url tags on every page, and to generate robots.txt / sitemap.xml.
+# Update this if the site is ever moved to a custom domain.
+SITE_BASE_URL = "https://gerihcoit.github.io/gerihco-website/"
 
 # Canonical page list. The "href" values are placeholders (see the README
 # for why these need to be edited once each page has a real Google Sites
@@ -150,6 +156,13 @@ ICON_SECURITY = _icon('<path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-
 ICON_CONSULTING = _icon(
     '<path d="M4 15c2-6 6-9 8-9s6 3 8 9"/><path d="M7 15c1.5-4 4-6 5-6s3.5 2 5 6"/>'
 )
+# Certification, audit & compliance: a clipboard with a checkmark, the
+# conventional generic glyph for audit/governance work.
+ICON_COMPLIANCE = _icon(
+    '<rect x="6" y="4" width="12" height="17" rx="2"/>'
+    '<path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1"/>'
+    '<path d="M9 12.5l2 2 4-4.5"/>'
+)
 ICON_EMAIL = _icon('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 6l8 6 8-6"/>')
 ICON_PHONE = _icon(
     '<path d="M5 4h4l2 5-2 1a10 10 0 005 5l1-2 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>'
@@ -158,47 +171,57 @@ ICON_PIN = _icon('<path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z"/><c
 
 SERVICES = [
     ("data-analytics", "Data Analytics", ICON_DATA,
-     "GERIHCO helps organizations transform raw data into actionable "
-     "insights that support better business decisions. We provide data "
-     "engineering, business intelligence, advanced analytics, and data "
-     "governance capabilities that help organizations build reliable data "
-     "infrastructure, understand complex information, and use data more "
-     "effectively."),
+     ["GERIHCO helps organizations transform raw data into actionable "
+      "insights that support better business decisions. We provide data "
+      "engineering, business intelligence, advanced analytics, and data "
+      "governance capabilities that help organizations build reliable data "
+      "infrastructure, understand complex information, and use data more "
+      "effectively."]),
     ("ai-machine-learning", "AI & Machine Learning", ICON_AI,
-     "GERIHCO applies artificial intelligence and machine learning to help "
-     "organizations automate complex processes, identify patterns, and "
-     "make more informed predictions. Our capabilities include predictive "
-     "modeling, natural language processing, computer vision, and the "
-     "deployment and governance of machine learning systems."),
+     ["GERIHCO applies artificial intelligence and machine learning to help "
+      "organizations automate complex processes, identify patterns, and "
+      "make more informed predictions. Our capabilities include predictive "
+      "modeling, natural language processing, computer vision, and the "
+      "deployment and governance of machine learning systems."]),
     ("cybersecurity", "Cybersecurity", ICON_SECURITY,
-     "GERIHCO helps organizations protect digital systems, networks, cloud "
-     "environments, and sensitive information from evolving cyber threats. "
-     "Our cybersecurity capabilities include endpoint protection, identity "
-     "and access management, managed detection and response, and "
-     "vulnerability assessment."),
+     ["GERIHCO helps organizations protect digital systems, networks, cloud "
+      "environments, and sensitive information from evolving cyber threats. "
+      "Our cybersecurity capabilities include endpoint protection, identity "
+      "and access management, managed detection and response, and "
+      "vulnerability assessment."]),
     ("management-consulting", "Management Consulting", ICON_CONSULTING,
-     "GERIHCO helps leaders address complex operational challenges, "
-     "improve organizational performance, and develop strategies for "
-     "long-term growth. Our consulting capabilities span corporate "
-     "strategy, operations improvement, organizational change, and "
-     "technology transformation."),
+     ["GERIHCO helps leaders address complex operational challenges, "
+      "improve organizational performance, and develop strategies for "
+      "long-term growth. Our consulting capabilities span corporate "
+      "strategy, operations improvement, organizational change, and "
+      "technology transformation."]),
     ("government-contracting", "Government Contracting", ICON_GOVERNMENT,
-     "GERIHCO provides support for organizations pursuing and managing "
-     "public-sector opportunities. Our capabilities include bid and "
-     "proposal development, regulatory compliance, contract "
-     "administration, and support navigating government procurement "
-     "requirements."),
+     ["GERIHCO provides support for organizations pursuing and managing "
+      "public-sector opportunities. Our capabilities include bid and "
+      "proposal development, regulatory compliance, contract "
+      "administration, and support navigating government procurement "
+      "requirements."]),
     ("financial-analysis", "Financial Analysis", ICON_FINANCE,
-     "GERIHCO helps organizations evaluate financial performance, assess "
-     "opportunities, and manage economic and financial risk. Our "
-     "capabilities include financial planning and analysis, corporate "
-     "valuation, investment appraisal, and risk management."),
+     ["GERIHCO helps organizations evaluate financial performance, assess "
+      "opportunities, and manage economic and financial risk. Our "
+      "capabilities include financial planning and analysis, corporate "
+      "valuation, investment appraisal, and risk management."]),
     ("manufacturing-optimization", "Manufacturing Optimization", ICON_MANUFACTURING,
-     "GERIHCO helps manufacturers improve operational efficiency through "
-     "data analytics, artificial intelligence, automation, and advanced "
-     "management strategies. Our capabilities include predictive "
-     "maintenance, process automation, quality and defect tracking, and "
-     "supply chain optimization."),
+     ["GERIHCO helps manufacturers improve operational efficiency through "
+      "data analytics, artificial intelligence, automation, and advanced "
+      "management strategies. Our capabilities include predictive "
+      "maintenance, process automation, quality and defect tracking, and "
+      "supply chain optimization."]),
+    ("certification-audit-compliance", "Certification, Audit & Compliance", ICON_COMPLIANCE,
+     ["This team provides governance, risk, and compliance support that "
+      "keeps clients aligned with regulatory requirements, security "
+      "standards, internal controls, and industry frameworks. It prepares "
+      "business and technology teams for audits, maintains certifications, "
+      "remediates control gaps, and produces the documented evidence "
+      "sustainable compliance programs require.",
+      "The team partners with business, technology, risk, legal, and audit "
+      "stakeholders to build compliance programs, manage certification "
+      "activities, and support continuous control monitoring."]),
 ]
 
 TECH_CATEGORIES = [
@@ -220,12 +243,12 @@ INDUSTRIES = [
      "GERIHCO helps financial organizations use data, technology, and "
      "analytical methods to improve decision-making, manage risk, and "
      "evaluate business opportunities.",
-     None),
+     ("images/financial-03.jpg", "A city skyline reflected in the water at dusk")),
     ("manufacturing", "Manufacturing", ICON_MANUFACTURING,
      "GERIHCO helps manufacturers improve operational performance through "
      "analytics, artificial intelligence, automation, and process "
      "optimization.",
-     None),
+     ("images/manufacturing-03.jpg", "Molten metal and rising steam inside an industrial steel mill")),
 ]
 
 AUDIENCE = [
@@ -514,6 +537,7 @@ SHARED_STYLE = """
   .service-card svg { width: 26px; height: 26px; color: var(--blue-deep); margin-bottom: 10px; }
   .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   .service-card p { font-size: 14px; }
+  .service-card p + p { margin-top: 10px; }
 
   /* ---------- Technology section (bottom of services.html) ---------- */
   section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
@@ -707,15 +731,13 @@ HEAD_LINKS = (
 
 def build_nav(active):
     """Return the <header class="nav"> block with the current page marked
-    via aria-current, and every internal link set to target="_top" so a
-    click navigates the whole browser tab rather than trying to load the
-    destination page inside the small embedded iframe (Google's iframe
-    sandboxing, used consistently across its embed products, blocks plain
-    top-level navigation from inside the frame unless the link target is
-    _top or _blank)."""
+    via aria-current. Internal links are plain relative hrefs -- GitHub
+    Pages serves these files directly rather than inside an iframe, so
+    unlike the project's earlier Google Sites "Embed code" incarnation,
+    no is needed to escape a surrounding frame."""
     links = []
     for key in PAGE_ORDER:
-        attrs = ' target="_top"'
+        attrs = ""
         if key == active:
             attrs += ' aria-current="page"'
         if key == "contact":
@@ -729,7 +751,7 @@ def build_nav(active):
         '<a class="skip-link" href="#main">Skip to main content</a>\n'
         '<header class="nav">\n'
         '  <div class="nav-inner">\n'
-        '    <a class="logo-link" href="{home}" target="_top"{logo_current} '
+        '    <a class="logo-link" href="{home}"{logo_current} '
         'aria-label="Gerihco \u2014 home">{logo}</a>\n'
         '    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">\n'
         '    <label for="nav-toggle" class="nav-toggle-label" '
@@ -746,13 +768,13 @@ FOOTER = (
     "<footer>\n"
     '  <div class="wrap">\n'
     '    <nav aria-label="Footer" class="footer-links">\n'
-    '      <a href="{home}" target="_top">Home</a>\n'
-    '      <a href="{services}" target="_top">Services</a>\n'
-    '      <a href="{industries}" target="_top">Industries</a>\n'
-    '      <a href="{about}" target="_top">About</a>\n'
-    '      <a href="{careers}" target="_top">Careers</a>\n'
-    '      <a href="{insights}" target="_top">Insights</a>\n'
-    '      <a href="{contact}" target="_top">Contact</a>\n'
+    '      <a href="{home}">Home</a>\n'
+    '      <a href="{services}">Services</a>\n'
+    '      <a href="{industries}">Industries</a>\n'
+    '      <a href="{about}">About</a>\n'
+    '      <a href="{careers}">Careers</a>\n'
+    '      <a href="{insights}">Insights</a>\n'
+    '      <a href="{contact}">Contact</a>\n'
     "    </nav>\n"
     "    <p>\u00a9 Gerihco. Management consulting for institutions that cannot "
     "afford to fail.</p>\n"
@@ -765,33 +787,36 @@ PAGE_SHELL = """<!--
   Generated by build_site.py; edit the shared components there (not this
   file directly) if the change should apply to every page.
 
-  HOW TO PUT THIS ON GOOGLE SITES:
-  1. In the Sites editor, use Pages > Add > Full page embed, name the page,
-     then choose Embed code and paste this file's contents in full.
-  2. "Full page embed" is used (rather than a boxed Insert > Embed) so this
-     page fills the browser tab like a normal page, instead of sitting in a
-     fixed-height box inside a Sites layout.
-  3. This file is self-contained (fonts load via the Google Fonts link
-     below; no other external files are required) so it renders the same
-     regardless of what else exists on the Sites account.
-  4. The navigation and footer links below point to "index.html",
-     "services.html", etc. as placeholders. Once each page is published in
-     Google Sites, replace these hrefs with the real published URLs -- see
-     README.md for the full list to update.
-  5. Every internal link uses target="_top". Google's iframe-based embed
-     sandboxing blocks a plain link from navigating the parent tab; _top
-     tells the browser to navigate the whole tab instead of trying (and
-     failing) to load the destination inside this small iframe.
+  DEPLOYMENT: GitHub Pages
+  This file is served as-is, alongside the other pages and the images/
+  folder, from the repository's Pages branch (Settings > Pages). No
+  embed step, no separate CMS settings, and no per-page URL substitution
+  are required -- the filename is the real path, and the <title> and
+  <meta name="description"> tags below are read directly by search
+  engines and social platforms, since GitHub Pages serves this HTML
+  directly rather than wrapping it in another page's iframe.
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>__TITLE__</title>
 <meta name="description" content="__DESCRIPTION__">
+<link rel="canonical" href="__CANONICAL_URL__">
+<!-- Open Graph / Twitter Card: control how this page looks when a link
+     to it is shared on LinkedIn, Slack, iMessage, etc. No og:image /
+     twitter:image is set yet -- there's no image on the site with the
+     landscape ~1200x630 aspect ratio these platforms expect, and a
+     stretched or oddly-cropped preview image would look worse than
+     none. Add one (see README) and the two image tags once available. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gerihco">
+<meta property="og:url" content="__CANONICAL_URL__">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__DESCRIPTION__">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="__TITLE__">
+<meta name="twitter:description" content="__DESCRIPTION__">
 __HEAD_LINKS__
-
-<style>
-__STYLE__
-</style>
+<link rel="stylesheet" href="styles.css">
 
 __NAV__
 
@@ -803,12 +828,17 @@ __FOOTER__
 
 def render_page(key, title, description, content_html):
     label = "Home" if key == "home" else LABEL[key]
+    # The home page's canonical URL is the bare site root (matching how
+    # GitHub Pages actually resolves "/"), not ".../index.html" -- search
+    # engines treat those as two different URLs for the same content
+    # unless told otherwise, so this avoids an easy duplicate-content trap.
+    canonical = SITE_BASE_URL if key == "home" else SITE_BASE_URL + HREF[key]
     html = PAGE_SHELL
     html = html.replace("__PAGE_LABEL__", label)
     html = html.replace("__TITLE__", title)
     html = html.replace("__DESCRIPTION__", description)
+    html = html.replace("__CANONICAL_URL__", canonical)
     html = html.replace("__HEAD_LINKS__", HEAD_LINKS)
-    html = html.replace("__STYLE__", SHARED_STYLE)
     html = html.replace("__NAV__", build_nav(key))
     html = html.replace("__CONTENT__", content_html)
     html = html.replace("__FOOTER__", FOOTER)
@@ -821,7 +851,7 @@ def render_page(key, title, description, content_html):
 
 def service_teaser_list():
     items = "\n      ".join(
-        '<li><a href="{href}#{anchor}" target="_top">{label}</a></li>'.format(
+        '<li><a href="{href}#{anchor}">{label}</a></li>'.format(
             href=HREF["services"], anchor=anchor, label=label
         )
         for anchor, label, _icon_html, _desc in SERVICES
@@ -831,11 +861,11 @@ def service_teaser_list():
         '  <div class="wrap">\n'
         "    <h2>What we do</h2>\n"
         "    <p>An overview of Gerihco's service lines; see the "
-        '<a href="{services}" target="_top">Services</a> page for more on each.</p>\n'
+        '<a href="{services}">Services</a> page for more on each.</p>\n'
         '    <ul class="service-list">\n'
         "      {items}\n"
         "    </ul>\n"
-        '    <a class="view-all" href="{services}" target="_top">View all capabilities \u2192</a>\n'
+        '    <a class="view-all" href="{services}">View all capabilities \u2192</a>\n'
         "  </div>\n"
         "</section>"
     ).format(services=HREF["services"], items=items)
@@ -843,7 +873,7 @@ def service_teaser_list():
 
 def home_content():
     serve_cards = "\n      ".join(
-        '<a class="serve-card" href="{industries}#{anchor}" target="_top">\n'
+        '<a class="serve-card" href="{industries}#{anchor}">\n'
         "        {icon}\n"
         "        <p>{label}</p>\n"
         "      </a>".format(industries=HREF["industries"], anchor=anchor, icon=icon, label=label)
@@ -858,8 +888,8 @@ def home_content():
         '    <p class="sub">Data, technology, and strategy for the government, '
         "financial, and manufacturing institutions that cannot afford to fail.</p>\n"
         '    <div class="btn-row">\n'
-        '      <a class="btn-primary" href="{contact}" target="_top">Start a conversation</a>\n'
-        '      <a class="btn-secondary" href="{services}" target="_top">Our capabilities</a>\n'
+        '      <a class="btn-primary" href="{contact}">Start a conversation</a>\n'
+        '      <a class="btn-secondary" href="{services}">Our capabilities</a>\n'
         "    </div>\n"
         "  </div>\n"
         "</section>\n"
@@ -887,7 +917,7 @@ def home_content():
         '  <div class="wrap">\n'
         "    <h2>Ready to talk through a complex problem?</h2>\n"
         '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}" target="_top">Contact Gerihco</a>\n'
+        'href="{contact}">Contact Gerihco</a>\n'
         "  </div>\n"
         "</section>\n"
         "</main>"
@@ -904,8 +934,13 @@ def services_content():
         '<article class="service-card" id="{anchor}">\n'
         "        {icon}\n"
         "        <h2>{label}</h2>\n"
-        "        <p>{desc}</p>\n"
-        "      </article>".format(anchor=anchor, icon=icon, label=label, desc=desc)
+        "        {paragraphs}\n"
+        "      </article>".format(
+            anchor=anchor,
+            icon=icon,
+            label=label,
+            paragraphs="\n        ".join("<p>{0}</p>".format(p) for p in desc),
+        )
         for anchor, label, icon, desc in SERVICES
     )
     tech_cards = "\n      ".join(
@@ -949,7 +984,7 @@ def services_content():
         '  <div class="wrap">\n'
         "    <h2>Ready to talk through a complex problem?</h2>\n"
         '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}" target="_top">Contact Gerihco</a>\n'
+        'href="{contact}">Contact Gerihco</a>\n'
         "  </div>\n"
         "</section>\n"
         "</main>"
@@ -1009,7 +1044,7 @@ def industries_content():
         '  <div class="wrap">\n'
         "    <h2>Ready to talk through a complex problem?</h2>\n"
         '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}" target="_top">Contact Gerihco</a>\n'
+        'href="{contact}">Contact Gerihco</a>\n'
         "  </div>\n"
         "</section>\n"
         "</main>"
@@ -1058,7 +1093,7 @@ def about_content():
         '  <div class="wrap">\n'
         "    <h2>Ready to talk through a complex problem?</h2>\n"
         '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}" target="_top">Contact Gerihco</a>\n'
+        'href="{contact}">Contact Gerihco</a>\n'
         "  </div>\n"
         "</section>\n"
         "</main>"
@@ -1282,14 +1317,117 @@ PAGES = [
 ]
 
 
+def not_found_content():
+    return (
+        '<main id="main">\n'
+        '<section class="page-header">\n'
+        '  <div class="wrap">\n'
+        "    <h1>Page not found</h1>\n"
+        "    <p>The page you're looking for doesn't exist or may have moved.</p>\n"
+        "  </div>\n"
+        "</section>\n"
+        '<section class="about-intro">\n'
+        '  <div class="wrap">\n'
+        '    <p><a class="btn-primary" style="background:#042C53;color:#ffffff" '
+        'href="{home}">Back to homepage</a></p>\n'
+        "  </div>\n"
+        "</section>\n"
+        "</main>"
+    ).format(home=HREF["home"])
+
+
+def render_404():
+    """Render the custom 404 page. GitHub Pages automatically serves a
+    file named exactly 404.html, from the site root, for any request
+    path that doesn't match a real file -- this replaces GitHub's
+    generic default 404 with one that matches the site's branding and
+    gives the visitor a working link back in. It's built by hand here
+    rather than through render_page()/PAGES, both because it isn't a
+    real navigable page (no nav item should ever point at it) and
+    because it needs one thing no other page does: a noindex directive,
+    since a "not found" page has no business appearing in search
+    results."""
+    html = PAGE_SHELL
+    html = html.replace("__PAGE_LABEL__", "404")
+    html = html.replace("__TITLE__", "Page Not Found | Gerihco")
+    html = html.replace(
+        "__DESCRIPTION__", "The page you're looking for doesn't exist or may have moved."
+    )
+    html = html.replace("__CANONICAL_URL__", SITE_BASE_URL)
+    html = html.replace("__HEAD_LINKS__", HEAD_LINKS + '\n<meta name="robots" content="noindex">')
+    html = html.replace("__NAV__", build_nav(None))
+    html = html.replace("__CONTENT__", not_found_content())
+    html = html.replace("__FOOTER__", FOOTER)
+    return html
+
+
+def render_robots_txt():
+    """A minimal robots.txt: explicitly allow everything, and point
+    crawlers at the sitemap so new/changed pages are discovered without
+    waiting for an unguided crawl."""
+    return "User-agent: *\nAllow: /\n\nSitemap: {0}sitemap.xml\n".format(SITE_BASE_URL)
+
+
+def render_sitemap_xml():
+    """List every real page (not 404.html, which is explicitly noindexed
+    and shouldn't be advertised as a page to crawl). <lastmod> is stamped
+    with today's date on every run of this script rather than tracking
+    each page's true last-changed date individually -- a reasonable
+    simplification for a site this size, but worth revisiting with real
+    per-page dates if the site grows enough for it to matter."""
+    today = date.today().isoformat()
+    entries = []
+    for key, _title, _description, _content_fn in PAGES:
+        url = SITE_BASE_URL if key == "home" else SITE_BASE_URL + HREF[key]
+        entries.append(
+            "  <url>\n    <loc>{url}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>".format(
+                url=url, lastmod=today
+            )
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries)
+        + "\n</urlset>\n"
+    )
+
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # One real, cacheable stylesheet shared by every page (including
+    # 404.html), rather than each page carrying its own inline copy.
+    # GitHub Pages serves this as a normal static file, so the browser
+    # fetches it once on the first page and reuses the cached copy for
+    # every subsequent page the visitor navigates to -- not something a
+    # Google Sites "Embed code" box, with its isolated per-page iframe,
+    # could actually take advantage of even if the CSS had been split
+    # out the same way there.
+    css_path = os.path.join(OUTPUT_DIR, "styles.css")
+    with open(css_path, "w", encoding="utf-8") as f:
+        f.write(SHARED_STYLE)
+    print("wrote", css_path, "({} bytes)".format(len(SHARED_STYLE)))
+
     for key, title, description, content_fn in PAGES:
         html = render_page(key, title, description, content_fn())
         out_path = os.path.join(OUTPUT_DIR, HREF[key])
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(html)
         print("wrote", out_path, "({} bytes)".format(len(html)))
+
+    # Site-wide files GitHub Pages can serve directly, which weren't
+    # possible (or meaningful) under the project's earlier Google Sites
+    # "Embed code" incarnation.
+    extras = {
+        "404.html": render_404(),
+        "robots.txt": render_robots_txt(),
+        "sitemap.xml": render_sitemap_xml(),
+    }
+    for filename, content in extras.items():
+        out_path = os.path.join(OUTPUT_DIR, filename)
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print("wrote", out_path, "({} bytes)".format(len(content)))
 
 
 if __name__ == "__main__":
