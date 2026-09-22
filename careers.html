@@ -64,18 +64,42 @@
 <section class="careers-openings">
   <div class="wrap">
     <h2>Open positions</h2>
-    <p>There are no open positions listed at this time. Check back soon, or submit your resume below for future consideration.</p>
-    <!-- Example only: remove this card once real postings exist, or duplicate its structure per real opening. -->
-    <div class="job-card">
-      <span class="badge">Example format</span>
-      <h3>[Placeholder job title]</h3>
-      <div class="job-tags">
-        <span class="job-tag">[Placeholder location]</span>
-        <span class="job-tag">[Placeholder employment type]</span>
-      </div>
-      <p class="placeholder">[Placeholder — one or two sentence job summary.]</p>
-      <a class="apply-link" href="#apply">Apply for this position →</a>
-    </div>
+    <article class="job-card" id="pam">
+        <h3>Privileged Access Management (PAM) — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role supports the enterprise Privileged Access Management program, covering privileged account onboarding, credential vaulting, secrets management, and session monitoring. Responsibilities include onboarding privileged, service, and application accounts into the PAM platform; performing vaulting, password rotation, policy updates, and break-glass configuration; monitoring privileged sessions and escalating anomalies; supporting certificate, key, and secrets lifecycle activities; and delivering remediation tied to audit findings along with PAM runbooks, documentation, and process improvements. Candidates should have hands-on experience with CyberArk or an equivalent PAM platform, a strong understanding of privileged account security and secrets management, and the ability to work independently on assigned onboarding and remediation tasks.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
+      <article class="job-card" id="iga">
+        <h3>Identity Governance & Administration (IGA) — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role supports identity lifecycle operations, application onboarding, and access certification campaigns within the IGA program. Responsibilities include processing joiner, mover, and leaver events and provisioning and deprovisioning requests; building connectors and onboarding applications into the IGA platform at a pace of roughly fifty per year; executing entitlement mapping and disconnected-application workflows; running access review campaigns and producing audit evidence; and supporting remediation closure, entitlement cleanup, and documentation for onboarding, certification, and lifecycle processes. Candidates should have experience with SailPoint, Saviynt, or a similar IGA platform, the ability to manage repetitive, high-volume governance work accurately, and a strong understanding of access models, entitlements, and certification workflows.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
+      <article class="job-card" id="authentication-services">
+        <h3>Authentication Services — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role supports MFA, SSO, passwordless authentication, conditional access, and identity provider policy implementation. Responsibilities include configuring and maintaining MFA, SSO, passwordless, and conditional access policies; integrating applications into enterprise authentication flows; supporting identity provider policy updates and troubleshooting; monitoring authentication logs and assisting with incident response; and delivering configuration documentation and integration runbooks. Candidates should have experience with Azure AD/Entra ID, Okta, Ping, or a similar platform, a strong understanding of modern authentication protocols and MFA strategies, and the ability to execute integration tasks with minimal supervision.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
+      <article class="job-card" id="authorization-entitlement-governance">
+        <h3>Authorization & Entitlement Governance — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role supports RBAC/ABAC modeling, entitlement cleanup, and policy-based access implementation. Responsibilities include assisting with role mining, entitlement rationalization, and segregation-of-duties analysis; building and updating RBAC/ABAC models across applications and APIs; supporting authorization policy implementation and testing; partnering with IGA teams to align roles and certification campaigns; and delivering role models, entitlement catalogs, and documentation. Candidates should have experience with enterprise authorization frameworks, strong analytical skills for entitlement cleanup and role modeling, and the ability to execute structured authorization tasks within defined timelines.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
+      <article class="job-card" id="iam-engineering">
+        <h3>IAM Engineering — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role supports platform engineering, architecture execution, and AI-driven automation across IAM systems. Responsibilities include implementing IAM platform components, integrations, and standards; supporting architecture patterns and design authority deliverables; building automation for evidence generation, anomaly detection, and agent identity governance; assisting with documentation, diagrams, and engineering artifacts; and executing integration and platform enhancement tasks. Candidates should have engineering experience with IAM platforms and cloud identity systems, familiarity with automation tooling and identity-related AI workflows, and the ability to deliver technical artifacts and integration work independently.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
+      <article class="job-card" id="flex-staffing">
+        <h3>Flex Staffing — Contract Role</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span></div>
+        <p>This contract role provides adaptable support across PAM, IGA, authentication, authorization, and IAM engineering, absorbing peak workloads and filling temporary gaps. Responsibilities include supporting onboarding spikes, certification cycles, and platform upgrades; assisting with audit preparation, evidence collection, and remediation tasks; providing cross-team operational support based on daily priorities; and delivering quick-turnaround tasks with minimal ramp-up time. Candidates should have broad IAM familiarity, the ability to learn new systems quickly, and comfort shifting between teams and task types.</p>
+        <a class="apply-link" href="#apply">Apply for this position →</a>
+      </article>
   </div>
 </section>
 <section class="careers-apply" id="apply">
@@ -91,7 +115,15 @@
       </div>
       <div class="field">
         <label for="applicant-position">Position of interest</label>
-        <input type="text" id="applicant-position" name="position">
+        <select id="applicant-position" name="position">
+          <option value="Privileged Access Management (PAM) — Contract Role">Privileged Access Management (PAM) — Contract Role</option>
+          <option value="Identity Governance & Administration (IGA) — Contract Role">Identity Governance & Administration (IGA) — Contract Role</option>
+          <option value="Authentication Services — Contract Role">Authentication Services — Contract Role</option>
+          <option value="Authorization & Entitlement Governance — Contract Role">Authorization & Entitlement Governance — Contract Role</option>
+          <option value="IAM Engineering — Contract Role">IAM Engineering — Contract Role</option>
+          <option value="Flex Staffing — Contract Role">Flex Staffing — Contract Role</option>
+          <option value="Other">Other / not listed</option>
+        </select>
       </div>
       <div class="field">
         <label for="applicant-resume">Resume (PDF or Word document)</label>

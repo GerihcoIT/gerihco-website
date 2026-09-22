@@ -97,12 +97,18 @@ real content before launch. At a glance:
   names, titles, or bios have been invented).
 - **Insights page — entirely placeholder.** No real articles exist yet;
   three placeholder cards illustrate the intended layout.
-- **Careers page — no real job postings exist.** The "Open positions"
-  section states plainly that none are currently listed, rather than
-  inventing plausible-looking roles. One example card is included,
-  clearly labeled "Example format," purely as a reference for the
-  structure to duplicate once real postings exist — it should be removed
-  before publishing if no roles are open.
+- **Careers page — six real job postings now in place.** Imported from
+  `CRC_Consutant_Job_Descriptions.docx` (six IAM contract roles: PAM,
+  IGA, Authentication Services, Authorization & Entitlement Governance,
+  IAM Engineering, and Flex Staffing) and rewritten as plain prose
+  paragraphs per request — the source document was bulleted throughout,
+  but the site version deliberately isn't. Only the one confirmed
+  attribute (Contract) is shown as a tag; no location or compensation
+  was supplied, so none is shown or implied. The intro paragraph above
+  "Open positions" is still placeholder text. The "Position of
+  interest" field on the application form is now a dropdown listing
+  these six roles plus "Other," rather than free text, now that there
+  are real titles to choose from.
 - **Contact page — email, phone, and mailing address**, and the
   submission backend for the form (see below).
 

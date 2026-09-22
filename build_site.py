@@ -652,7 +652,7 @@ SHARED_STYLE = """
   .contact-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
   .contact-form label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #33363a; }
   .contact-form .field { margin-bottom: 18px; }
-  .contact-form input, .contact-form textarea {
+  .contact-form input, .contact-form textarea, .contact-form select {
     width: 100%;
     padding: 11px 12px;
     border: 1px solid var(--border);
@@ -1180,26 +1180,120 @@ def contact_content():
     ).format(icon_email=ICON_EMAIL, icon_phone=ICON_PHONE, icon_pin=ICON_PIN)
 
 
+JOB_OPENINGS = [
+    ("pam", "Privileged Access Management (PAM) \u2014 Contract Role", "Contract",
+     "This contract role supports the enterprise Privileged Access Management "
+     "program, covering privileged account onboarding, credential vaulting, "
+     "secrets management, and session monitoring. Responsibilities include "
+     "onboarding privileged, service, and application accounts into the PAM "
+     "platform; performing vaulting, password rotation, policy updates, and "
+     "break-glass configuration; monitoring privileged sessions and escalating "
+     "anomalies; supporting certificate, key, and secrets lifecycle "
+     "activities; and delivering remediation tied to audit findings along "
+     "with PAM runbooks, documentation, and process improvements. Candidates "
+     "should have hands-on experience with CyberArk or an equivalent PAM "
+     "platform, a strong understanding of privileged account security and "
+     "secrets management, and the ability to work independently on assigned "
+     "onboarding and remediation tasks."),
+    ("iga", "Identity Governance & Administration (IGA) \u2014 Contract Role", "Contract",
+     "This contract role supports identity lifecycle operations, application "
+     "onboarding, and access certification campaigns within the IGA program. "
+     "Responsibilities include processing joiner, mover, and leaver events "
+     "and provisioning and deprovisioning requests; building connectors and "
+     "onboarding applications into the IGA platform at a pace of roughly "
+     "fifty per year; executing entitlement mapping and "
+     "disconnected-application workflows; running access review campaigns "
+     "and producing audit evidence; and supporting remediation closure, "
+     "entitlement cleanup, and documentation for onboarding, certification, "
+     "and lifecycle processes. Candidates should have experience with "
+     "SailPoint, Saviynt, or a similar IGA platform, the ability to manage "
+     "repetitive, high-volume governance work accurately, and a strong "
+     "understanding of access models, entitlements, and certification "
+     "workflows."),
+    ("authentication-services", "Authentication Services \u2014 Contract Role", "Contract",
+     "This contract role supports MFA, SSO, passwordless authentication, "
+     "conditional access, and identity provider policy implementation. "
+     "Responsibilities include configuring and maintaining MFA, SSO, "
+     "passwordless, and conditional access policies; integrating "
+     "applications into enterprise authentication flows; supporting "
+     "identity provider policy updates and troubleshooting; monitoring "
+     "authentication logs and assisting with incident response; and "
+     "delivering configuration documentation and integration runbooks. "
+     "Candidates should have experience with Azure AD/Entra ID, Okta, Ping, "
+     "or a similar platform, a strong understanding of modern "
+     "authentication protocols and MFA strategies, and the ability to "
+     "execute integration tasks with minimal supervision."),
+    ("authorization-entitlement-governance",
+     "Authorization & Entitlement Governance \u2014 Contract Role", "Contract",
+     "This contract role supports RBAC/ABAC modeling, entitlement cleanup, "
+     "and policy-based access implementation. Responsibilities include "
+     "assisting with role mining, entitlement rationalization, and "
+     "segregation-of-duties analysis; building and updating RBAC/ABAC "
+     "models across applications and APIs; supporting authorization policy "
+     "implementation and testing; partnering with IGA teams to align roles "
+     "and certification campaigns; and delivering role models, entitlement "
+     "catalogs, and documentation. Candidates should have experience with "
+     "enterprise authorization frameworks, strong analytical skills for "
+     "entitlement cleanup and role modeling, and the ability to execute "
+     "structured authorization tasks within defined timelines."),
+    ("iam-engineering", "IAM Engineering \u2014 Contract Role", "Contract",
+     "This contract role supports platform engineering, architecture "
+     "execution, and AI-driven automation across IAM systems. "
+     "Responsibilities include implementing IAM platform components, "
+     "integrations, and standards; supporting architecture patterns and "
+     "design authority deliverables; building automation for evidence "
+     "generation, anomaly detection, and agent identity governance; "
+     "assisting with documentation, diagrams, and engineering artifacts; "
+     "and executing integration and platform enhancement tasks. Candidates "
+     "should have engineering experience with IAM platforms and cloud "
+     "identity systems, familiarity with automation tooling and "
+     "identity-related AI workflows, and the ability to deliver technical "
+     "artifacts and integration work independently."),
+    ("flex-staffing", "Flex Staffing \u2014 Contract Role", "Contract",
+     "This contract role provides adaptable support across PAM, IGA, "
+     "authentication, authorization, and IAM engineering, absorbing peak "
+     "workloads and filling temporary gaps. Responsibilities include "
+     "supporting onboarding spikes, certification cycles, and platform "
+     "upgrades; assisting with audit preparation, evidence collection, and "
+     "remediation tasks; providing cross-team operational support based on "
+     "daily priorities; and delivering quick-turnaround tasks with minimal "
+     "ramp-up time. Candidates should have broad IAM familiarity, the "
+     "ability to learn new systems quickly, and comfort shifting between "
+     "teams and task types."),
+]
+
+
 def careers_content():
     """Careers page.
 
-    Two deliberate content decisions here, both worth flagging to
-    whoever reviews this before publishing:
+    Open positions are now real, imported from the client-supplied job
+    description document (six IAM contract roles) and rewritten as
+    plain prose paragraphs per the client's request -- no bullet lists
+    or checklists, even though the source document was bulleted
+    throughout. Each card keeps only the one confirmed, stated
+    attribute (Contract) as a tag; no location or salary was supplied,
+    so none is invented.
 
-    1. No fabricated job listings. Since no real openings were supplied,
-       the "Open positions" section states plainly that none are
-       currently listed, rather than inventing plausible-looking roles --
-       a fake job posting is a materially worse placeholder than most,
-       since a real applicant could act on it. A single clearly-labeled
-       example card is included underneath purely as a formatting
-       reference for whoever adds the first real posting.
-    2. The resume upload field is a genuine <input type="file">, but a
-       static site (Google Sites embed or GitHub Pages alike) has no
-       server to receive that file. This mirrors the contact form's
-       "no backend yet" situation, and is called out the same way, with
-       an additional plain-email fallback that works today without any
-       extra infrastructure.
+    The resume upload field is a genuine <input type="file">, but a
+    static site (Google Sites embed or GitHub Pages alike) has no
+    server to receive that file. This mirrors the contact form's
+    "no backend yet" situation, and is called out the same way, with
+    an additional plain-email fallback that works today without any
+    extra infrastructure.
     """
+    job_cards = "\n      ".join(
+        '<article class="job-card" id="{anchor}">\n'
+        "        <h3>{title}</h3>\n"
+        '        <div class="job-tags"><span class="job-tag">{tag}</span></div>\n'
+        "        <p>{desc}</p>\n"
+        '        <a class="apply-link" href="#apply">Apply for this position \u2192</a>\n'
+        "      </article>".format(anchor=anchor, title=title, tag=tag, desc=desc)
+        for anchor, title, tag, desc in JOB_OPENINGS
+    )
+    position_options = "\n          ".join(
+        '<option value="{title}">{title}</option>'.format(title=title)
+        for _anchor, title, _tag, _desc in JOB_OPENINGS
+    )
     return (
         '<main id="main">\n'
         '<section class="page-header">\n'
@@ -1213,22 +1307,7 @@ def careers_content():
         '<section class="careers-openings">\n'
         '  <div class="wrap">\n'
         "    <h2>Open positions</h2>\n"
-        "    <p>There are no open positions listed at this time. Check "
-        "back soon, or submit your resume below for future consideration."
-        "</p>\n"
-        "    <!-- Example only: remove this card once real postings exist, "
-        "or duplicate its structure per real opening. -->\n"
-        '    <div class="job-card">\n'
-        '      <span class="badge">Example format</span>\n'
-        "      <h3>[Placeholder job title]</h3>\n"
-        '      <div class="job-tags">\n'
-        '        <span class="job-tag">[Placeholder location]</span>\n'
-        '        <span class="job-tag">[Placeholder employment type]</span>\n'
-        "      </div>\n"
-        '      <p class="placeholder">[Placeholder \u2014 one or two '
-        "sentence job summary.]</p>\n"
-        '      <a class="apply-link" href="#apply">Apply for this position \u2192</a>\n'
-        "    </div>\n"
+        "    {job_cards}\n"
         "  </div>\n"
         "</section>\n"
         '<section class="careers-apply" id="apply">\n'
@@ -1244,7 +1323,10 @@ def careers_content():
         "      </div>\n"
         '      <div class="field">\n'
         '        <label for="applicant-position">Position of interest</label>\n'
-        '        <input type="text" id="applicant-position" name="position">\n'
+        '        <select id="applicant-position" name="position">\n'
+        "          {position_options}\n"
+        '          <option value="Other">Other / not listed</option>\n'
+        "        </select>\n"
         "      </div>\n"
         '      <div class="field">\n'
         '        <label for="applicant-resume">Resume (PDF or Word document)</label>\n'
@@ -1274,7 +1356,7 @@ def careers_content():
         "  </div>\n"
         "</section>\n"
         "</main>"
-    ).format(icon_email=ICON_EMAIL)
+    ).format(job_cards=job_cards, position_options=position_options, icon_email=ICON_EMAIL)
 
 
 # ---------------------------------------------------------------------------
