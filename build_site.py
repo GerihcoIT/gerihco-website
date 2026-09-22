@@ -45,8 +45,10 @@ OUTPUT_DIR = "/mnt/user-data/outputs"
 
 # The site's live, canonical base URL. Used to build the <link rel="canonical">
 # and og:url tags on every page, and to generate robots.txt / sitemap.xml.
-# Update this if the site is ever moved to a custom domain.
-SITE_BASE_URL = "https://gerihcoit.github.io/gerihco-website/"
+# Now pointing at the gerihco.com custom domain (via Squarespace DNS + the
+# repo's CNAME file) rather than the gerihcoit.github.io URL. Revert this if
+# the custom domain is ever removed and the site falls back to raw Pages.
+SITE_BASE_URL = "https://gerihco.com/"
 
 # Canonical page list. The "href" values are placeholders (see the README
 # for why these need to be edited once each page has a real Google Sites

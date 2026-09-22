@@ -374,7 +374,7 @@
   .contact-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
   .contact-form label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #33363a; }
   .contact-form .field { margin-bottom: 18px; }
-  .contact-form input, .contact-form textarea {
+  .contact-form input, .contact-form textarea, .contact-form select {
     width: 100%;
     padding: 11px 12px;
     border: 1px solid var(--border);
